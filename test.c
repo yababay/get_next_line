@@ -5,84 +5,46 @@
 #include <sys/types.h>
 //#include "../src/get_next_line.h"
 
+static int check_buff(char **text)
+{
+    //nt c = 0;
+    //while(*buff){buff++; c++;}
+    printf("acc=%s\n", *text);
+    text++;
+    printf("buff=%s\n", *text);
+    text--;
+    return 0;
+}
+
 int main(int argc, char **argv)
 {
+    if(argc > 2) return 1;
+
 	int fd;
     char *buff;
     char **text;
-    size_t sz = 80;
+    size_t sz = 8;
 
     buff = (char * ) malloc(sizeof(char)  * (sz + 1));
     text = (char **) malloc(sizeof(char*) * (2));
-
-    if(argc > 2) return 1;
-
-    fd = open(argv[1], O_RDONLY);
-
-    read(fd, buff, sz);
-
-    buff[sz] = '\0';
-
-    *text = buff;
-
-    while(*buff){
-        if(*buff == '\n') break;
-        buff++;
-    } 
-
-    if(!*buff) return 1;
-
-    *buff = '\0';
-
-    printf("%s\n", *text);
-
-    close(fd);
-
-
-/*
-    const char *hello = "Hello, ";
-    const char *world = "World!" ;
-
-    char *mem1 = (char*) malloc(10);
-    char *mem2 = (char*) malloc(10);
-
-    char *m1 = mem1;
-    char *m2 = mem2;
-
-    *text = m1;
-    text++;
-    *text = m2;
-
-    while(*hello) *mem1++ = *hello++;
-    while(*world) *mem2++ = *world++;
-
-    *mem1 = '\0';
-    *mem2 = '\0';
-
-    printf("%s%s\n", *--text, *text);
-*/
-    /*
-    if(argc > 2) return 1;
+    char * empty = (char *)malloc(1);
+    *empty = '\0';
+    *text = empty;
 
     fd = open(argv[1], O_RDONLY);
 
-    read(fd, buff, sz);
+    int c = 5;
 
-    buff[sz] = '\0';
-
-    while(*buff){
-        printf("%c\n", *buff);
-        if(*buff == '\n'){
-            *buff = '\0';
-            *text = buff;
-            break;
+    while(c--){
+        read(fd, buff, sz);
+        buff[sz] = '\0';
+        text++;
+        *text = buff;
+        text--;
+        int ok = check_buff(text);
         }
-        buff++;
-    }
-
-    printf("%s\n", &(text[0]));
 
     close(fd);
-    */
+
     return 0;
 }
