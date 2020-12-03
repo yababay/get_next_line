@@ -15,6 +15,31 @@ int main(int argc, char **argv)
     buff = (char * ) malloc(sizeof(char)  * (sz + 1));
     text = (char **) malloc(sizeof(char*) * (2));
 
+    if(argc > 2) return 1;
+
+    fd = open(argv[1], O_RDONLY);
+
+    read(fd, buff, sz);
+
+    buff[sz] = '\0';
+
+    *text = buff;
+
+    while(*buff){
+        if(*buff == '\n') break;
+        buff++;
+    } 
+
+    if(!*buff) return 1;
+
+    *buff = '\0';
+
+    printf("%s\n", *text);
+
+    close(fd);
+
+
+/*
     const char *hello = "Hello, ";
     const char *world = "World!" ;
 
@@ -35,7 +60,7 @@ int main(int argc, char **argv)
     *mem2 = '\0';
 
     printf("%s%s\n", *--text, *text);
-
+*/
     /*
     if(argc > 2) return 1;
 
