@@ -1,5 +1,6 @@
 NAME   = get_next_line.a
-SRCS   = get_next_line.c
+SRCS   = get_next_line.c \
+		 get_next_line_utils.c 
 
 OBJS   = ${SRCS:.c=.o}
 CC     = gcc
@@ -25,6 +26,6 @@ tclean:
 	${RM} test
 
 testc:
-	gcc -o test test.c #-L. -lext
+	gcc -o test test.c get_next_line.o get_next_line_utils.o
 
 re: clean all
