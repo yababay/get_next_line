@@ -1,11 +1,9 @@
-# Prerequisites
-*.d
-
 # Object files
 *.o
 *.ko
 *.obj
 *.elf
+*.pyc
 
 # Linker output
 *.ilk
@@ -36,17 +34,19 @@
 *.x86_64
 *.hex
 
-# Debug files
-*.dSYM/
-*.su
-*.idb
-*.pdb
+# Junk files
+*.DS_Store
+.AppleDouble
+.LSOverride
+.nfs*
 
-# Kernel Module Compile Results
-*.mod*
-*.cmd
-.tmp_versions/
-modules.order
-Module.symvers
-Mkfile.old
-dkms.conf
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Others
+/tmp
+./test
