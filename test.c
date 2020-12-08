@@ -15,21 +15,13 @@ int main(int argc, char **argv)
     printf("Testing read_next_line...\n");
 
 	int fd;
-    char **text;
-    text = (char **) malloc(sizeof(char*) * (2));
+    char **lines;
+    lines = (char **) malloc(sizeof(char*) * (1));
 
     fd = open(argv[1], O_RDONLY);
 
-    int result = get_next_line(fd, text);
-    if(result) printf("The first line is %s\n", *text);
-/*
-
-    result = get_next_line(fd, text);
-    if(result) printf("The second line is %s\n", *text);
-
-    result = get_next_line(fd, text);
-    if(result) printf("The third line is %s\n", *text);
-*/
+    int result = get_next_line(fd, lines);
+    printf("%s\n", *lines);
     close(fd);
 
     return 0;
