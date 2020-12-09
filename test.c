@@ -16,12 +16,20 @@ int main(int argc, char **argv)
 
 	int fd;
     char **lines;
-    lines = (char **) malloc(sizeof(char*) * (1));
+    lines =  NULL; //(char **) malloc(sizeof(char*) * (1));
 
     fd = open(argv[1], O_RDONLY);
 
     int result = get_next_line(fd, lines);
+    printf("%p\n", lines);
+    /*printf("%s\n", *lines);
+
+    /*result = get_next_line(fd, lines);
     printf("%s\n", *lines);
+
+    result = get_next_line(fd, lines);
+    printf("%s\n", *lines);
+    */
     close(fd);
 
     return 0;

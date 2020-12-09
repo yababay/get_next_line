@@ -5,7 +5,7 @@ int get_next_line(int const fd, char **lines)
 {
     char **accumulator;
     char *buff;
-    int line_counter = 0;
+    size_t line_counter = 0;
 
     size_t sz = 8;
 
@@ -27,10 +27,18 @@ int get_next_line(int const fd, char **lines)
         read(fd, *accumulator, sz);
         accumulator--;
     }
-    accumulator++;
+    /*accumulator++;
     *lines = *accumulator;
     accumulator--;
+    */
+    if(lines != NULL) { line_counter = sizeof((char**)lines);}
     line_counter++;
-    //char **new_lines = (char **) malloc(sizeof(char*) * (line_counter));
+    printf("lines_c = %ld\n", line_counter);
+    char **new_lines = (char **) malloc(sizeof(char*) * (line_counter));
+    accumulator++;
+    *new_lines = *accumulator;
+    accumulator--;
+    printf("new_line = %s\n", *new_lines);
+    lines = new_lines; //TODO: put old lines in new container
     return 1;
 }
