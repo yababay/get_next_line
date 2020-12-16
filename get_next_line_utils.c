@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include "get_next_line.h"
 
-// TODO: static
-
 int fill_the_fresh(char **accumulator, char *fresh){
     char *top = *accumulator;
     accumulator++;
@@ -22,9 +20,9 @@ char* get_fresh(char **accumulator){
     accumulator--;
     while(*top++) c++;
     while(*bottom && *bottom != '\n') {c++; bottom++;}
-    char *tmp = (char*) malloc(c + 1);
-    tmp[c] = '\0';
-    return tmp;
+    char *fresh = (char*) malloc(c + 1);
+    fresh[c] = '\0';
+    return fresh;
 }
 
 int check_line(char **accumulator){
@@ -35,15 +33,9 @@ int check_line(char **accumulator){
         char *bottom = *accumulator;
         while( *bottom != '\n'){bottom++;}
         bottom++;
-        int c = 0;
-        while(*bottom){bottom++; c++;}
-        char *tmp = (char*)malloc(c + 1);
-        char *tail = *accumulator;
-        while(*tail){*tmp++ = *tail++;}
-        *tmp = '\0';
         *accumulator = fresh;
         accumulator--;
-        *accumulator = tmp;
+        *accumulator = bottom;
         return 1; //we found new line
     }
     *accumulator = fresh;

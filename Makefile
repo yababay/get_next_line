@@ -5,7 +5,7 @@ SRCS   = get_next_line.c \
 OBJS   = ${SRCS:.c=.o}
 CC     = gcc
 RM     = rm -rf
-CFLAGS = -Wall -Wextra -Werror -D BUFFER_SIZE=32
+CFLAGS = -Wall -Wextra -Werror -D BUFFER_SIZE=8
 
 %.o: %.c
 	${CC} ${CFLAGS} -c $<
@@ -26,6 +26,6 @@ tclean:
 	${RM} test
 
 testc:
-	gcc -o test test.c get_next_line.o get_next_line_utils.o
+	gcc -o test test.c get_next_line.o get_next_line_utils.o -D BUFFER_SIZE=8
 
 re: clean all
