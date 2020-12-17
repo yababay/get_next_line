@@ -5,13 +5,21 @@
 static char **accumulator;
 static int first = 1;
 static char *buff;
+static char *empty;
 static size_t sz = BUFFER_SIZE;
 
 int get_next_line(int const fd, char **lines)
 {
-
+    if(!first && **accumulator == '\n'){
+        *accumulator += 1;
+        *lines = empty;
+        return 1;
+    }
+    
     if(first){
         buff = (char * ) malloc(sizeof(char)  * (sz + 1));
+        empty = (char * ) malloc(sizeof(char)  * (1));
+        *empty = '\0';
         buff[sz] = '\0';
         accumulator   = (char **) malloc(sizeof(char*) * (2));
         *accumulator  = (char *)malloc(1);
