@@ -7,7 +7,7 @@ int fill_the_fresh(char **accumulator, char *fresh){
     char *bottom = *accumulator;
     accumulator--;
     while(*top) *fresh++ = *top++;
-    while(*bottom && *bottom != '\n') {*fresh++ = *bottom++;}
+    while(*bottom && *bottom != '\n' && *bottom != EOF) {*fresh++ = *bottom++;}
     if(*bottom) return 1;
     return 0;
 }
@@ -19,7 +19,7 @@ char* get_fresh(char **accumulator){
     char *bottom = *accumulator;
     accumulator--;
     while(*top++) c++;
-    while(*bottom && *bottom != '\n') {c++; bottom++;}
+    while(*bottom && *bottom != '\n' && *bottom != EOF) {c++; bottom++;}
     char *fresh = (char*) malloc(c + 1);
     fresh[c] = '\0';
     return fresh;
@@ -31,8 +31,8 @@ int check_line(char **accumulator){
     if(result) {
         accumulator++;
         char *bottom = *accumulator;
-        while( *bottom != '\n'){bottom++;}
-        bottom++;
+        while(*bottom != '\n' && *bottom != EOF){bottom++;}
+        if(*bottom == '\n') {bottom++;}
         *accumulator = fresh;
         accumulator--;
         *accumulator = bottom;
