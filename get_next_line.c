@@ -32,8 +32,25 @@ int get_next_line(int const fd, char **lines)
     while(first || !check_line(accumulator)){
         first = 0;
         accumulator++;
-        read(fd, *accumulator, sz);
+        size_t result = read(fd, *accumulator, sz);
+        if(result < sz)
+        {
+            char *tmp = *accumulator; 
+            int c = result;
+            while(c){
+                tmp++;
+                c--;
+            }
+            *tmp = '\0';
+            accumulator--;
+            check_line(accumulator);
+            //printf("%s %ld\n ", *accumulator, result);
+            accumulator++;
+            *lines = *accumulator;
+            return 0;
+        }
         accumulator--;
+        
     }
 
     accumulator++;

@@ -7,23 +7,17 @@
 
 int main(int argc, char **argv)
 {
-    if(argc != 2){
-        printf("There is nothing to read :(\n");
-        return 1;
-    } 
-
-    printf("Testing read_next_line...\n");
-
 	int fd;
     char *line;
     int result;
 
-    fd = open(argv[1], O_RDONLY);
+    fd = (argc == 1 ? 0 : open(argv[1], O_RDONLY));
 
     int count = 1;
-    while(count < 15){
+    while(1){
         result = get_next_line(fd, &line);
-        printf("%d) %s\n", count, line);
+        printf("%d) %s %d\n", count, line, result);
+        if(!result) break;
         count++;
     }
     
@@ -31,3 +25,10 @@ int main(int argc, char **argv)
 
     return 0;
 }
+
+/*if(argc != 2){
+        printf("There is nothing to read :(\n");
+        return 1;
+    } 
+
+    printf("Testing read_next_line...\n");*/
