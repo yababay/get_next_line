@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include "get_next_line.h"
 
-
 static char **accumulator;
 static int first = 1;
 static char *buff;
@@ -15,7 +14,6 @@ int get_next_line(int const fd, char **lines)
         *lines = empty;
         return 1;
     }
-    
     if(first){
         buff = (char * ) malloc(sizeof(char)  * (sz + 1));
         empty = (char * ) malloc(sizeof(char)  * (1));
@@ -28,7 +26,6 @@ int get_next_line(int const fd, char **lines)
         *accumulator = buff;
         accumulator--;
     }
-
     while(first || !check_line(accumulator)){
         first = 0;
         accumulator++;
@@ -44,15 +41,12 @@ int get_next_line(int const fd, char **lines)
             *tmp = '\0';
             accumulator--;
             check_line(accumulator);
-            //printf("%s %ld\n ", *accumulator, result);
             accumulator++;
             *lines = *accumulator;
             return 0;
         }
         accumulator--;
-        
     }
-
     accumulator++;
     *lines = *accumulator;
     buff[0] = '\0';
